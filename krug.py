@@ -1,21 +1,41 @@
 from graph import *
-a=500
-b=500
-canvasSize(a,b)
-r=10 #радиус шарика
-c=circle(40,40,r)
+width=700
+height=700
+canvasSize(width,height)
+brushColor('green')
+r=30 #радиус шарика
+x = 60
+y = 210
+c=circle(x, y, r)
 mX=1
 mY=1
+
 def update():
     global mX
     global mY
-    x = xCoord(c)
+    global x
+    global y
+    '''x = xCoord(c)
     y = yCoord(c)
-    moveObjectBy(c, mX, mY)
-    if x==a-2*r:
+    x += mX
+    y += mY'''
+
+    x += mX
+    y += mY
+
+    moveObjectTo(c, x, y)
+    if x + 2*r >= width:
+        mX *= -1
+
+    if y<=0:
         mY=-mY
-    if y==b-2*r:
+
+    if x<=0:
         mX=-mX
-onTimer(update,10)
+
+    if y+2*r>=height:
+        mY=-mY
+
+onTimer(update,5)
 
 run()
